@@ -25,8 +25,9 @@ class QuotesController < Rulers::Controller
   end
 
   def show
-    quote = FileMode.find(params['id'])
-    render :quote, :obj => quote
+    quote_1 = FileModel.find(params['id'])
+    ua    = request.user_agent
+    render_response :quote, :obj => quote_1, :ua => ua
   end
 
   def new_quote
@@ -39,5 +40,11 @@ class QuotesController < Rulers::Controller
     m = FileModel.create attrs
 
     render :quote, :obj => m
+  end
+
+  def update_quote
+    #quote_1 = FileModel.find(1)
+
+    #quote_1.hash[:]
   end
 end
