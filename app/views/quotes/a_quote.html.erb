@@ -7,3 +7,12 @@ There is nothing either good or bad but
 <p>
   Ruby version <%= RUBY_VERSION %>
 </p>
+
+<table border="1">
+  <% env.each do |name, value| %>
+    <tr>
+      <td><%= name %></td>
+      <td><%= value %></td>
+    </tr>
+  <% end %>
+</table>
