@@ -50,50 +50,50 @@
 
 #use Canadianize, ", simple"
 
-class MiddleWare1
-  def initialize(app)
-    @app = app
-  end
+#class MiddleWare1
+  #def initialize(app)
+    #@app = app
+  #end
 
-  def call(env)
-    #content[0] += @arg + ', eh?'
-    puts 'MiddleWare1'
-    status, headers, content = @app.call(env)
-    content[0] += ', eh?'
-    puts content.to_s
-    [status, headers, content]
-  end
-end
+  #def call(env)
+    ##content[0] += @arg + ', eh?'
+    #puts 'MiddleWare1'
+    #status, headers, content = @app.call(env)
+    #content[0] += ', eh?'
+    #puts content.to_s
+    #[status, headers, content]
+  #end
+#end
 
-#use MiddleWare1
+##use MiddleWare1
 
-class MiddleWare2
-  def initialize(app)
-    @app = app
-  end
+#class MiddleWare2
+  #def initialize(app)
+    #@app = app
+  #end
 
-  def call(env)
-    #content[0] += @arg + ', eh?'
-    puts 'MiddleWare2'
-    status, headers, content = @app.call(env)
-    #content[0] += @arg + ', eh?'
-    content[0] += ' middleware2'
-    puts content.to_s
-    [status, headers, content]
-  end
-end
+  #def call(env)
+    ##content[0] += @arg + ', eh?'
+    #puts 'MiddleWare2'
+    #status, headers, content = @app.call(env)
+    ##content[0] += @arg + ', eh?'
+    #content[0] += ' middleware2'
+    #puts content.to_s
+    #[status, headers, content]
+  #end
+#end
 
 #use MiddleWare2
 
-use MiddleWare1
+#use MiddleWare1
 
-use MiddleWare2
+#use MiddleWare2
 
 #use MiddleWare1
-run proc {
-  puts 'proc'
-  [200, {'Content-Type' => 'text/html'}, ["Hello, world"]]
-}
+#run proc {
+  #puts 'proc'
+  #[200, {'Content-Type' => 'text/html'}, ["Hello, world"]]
+#}
 
 #infinity = Proc.new {|env| [200, {'Content-Type' => 'text/html'}, ["Hello, world"]]}
 
@@ -153,4 +153,12 @@ run proc {
 #use BenchMarker, 10_000
 
 #run Rack::Lobster.new
+
+require './config/application'
+
+map '/' do
+  run QuotesController.action(:index)
+end
+
+run BestQuotes::Application.new
 
